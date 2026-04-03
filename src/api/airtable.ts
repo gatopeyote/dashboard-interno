@@ -16,6 +16,7 @@ import type {
 } from '../lib/airtable'
 
 import type {
+  EstadoOperacion,
   RegistroOperacion,
   RegistroClienteAirtable,
   RespuestaAPI,
@@ -44,13 +45,19 @@ const REGISTROS_POR_PAGINA = 100
  *
  * @param registro - Registro bruto devuelto por `airtableFetch`.
  */
+/** Estados válidos de operación para normalizar valores de Airtable. */
+const ESTADOS_VALIDOS_OPERACION: EstadoOperacion[] = ['pendiente', 'completada', 'error']
+
 function mapearOperacion(registro: AirtableRecord<Partial<RegistroOperacion>>): RegistroOperacion {
+  const estadoCrudo = registro.fields.estado
   return {
     id: registro.id,
-    // NOTA: casting implícito vía `?? ''` — garantiza string aunque el campo no exista
     nombre: registro.fields.nombre ?? '',
-    estado: registro.fields.estado ?? '',
-    fecha:  registro.fields.fecha  ?? '',
+    // Normalizar estado: si el valor no es reconocido, cae a 'error' como fallback seguro
+    estado: estadoCrudo !== undefined && ESTADOS_VALIDOS_OPERACION.includes(estadoCrudo)
+      ? estadoCrudo
+      : 'error',
+    fecha: registro.fields.fecha ?? '',
   }
 }
 
