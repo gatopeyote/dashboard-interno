@@ -2,6 +2,8 @@
 // Carga el estado del sistema y la lista de operaciones de Airtable en paralelo.
 // Si alguna carga falla, muestra un mensaje de error en lugar de la vista.
 
+export const dynamic = 'force-dynamic'
+
 import {
   obtenerEstadoSistema,
   obtenerOperacionesPorEstado,

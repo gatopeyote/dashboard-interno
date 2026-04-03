@@ -2,6 +2,8 @@
 // Carga en paralelo las métricas de clientes y los eventos de auditoría.
 // Si alguna carga falla, muestra un mensaje de error en lugar de la vista.
 
+export const dynamic = 'force-dynamic'
+
 import { obtenerMetricasClientes, obtenerEventosAuditoria } from '../../api/reportes'
 import { ReportesView } from './ReportesView'
 

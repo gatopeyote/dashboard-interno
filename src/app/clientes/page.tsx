@@ -2,6 +2,8 @@
 // Obtiene los clientes desde Supabase y los pasa a ClientesView.
 // Si la carga falla muestra un mensaje de error en lugar de la vista.
 
+export const dynamic = 'force-dynamic'
+
 import { obtenerClientes } from '../../api/clientes'
 import { ClientesView } from './ClientesView'
 

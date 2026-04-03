@@ -2,6 +2,8 @@
 // Obtiene los usuarios desde Supabase y los pasa a UsuariosView.
 // Si la carga falla muestra un mensaje de error en lugar de la vista.
 
+export const dynamic = 'force-dynamic'
+
 import { obtenerUsuarios } from '../../api/usuarios'
 import { UsuariosView } from './UsuariosView'
 
